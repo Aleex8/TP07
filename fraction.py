@@ -1,3 +1,6 @@
+class FractionNotUnderZero(Exception):
+    pass
+
 class Fraction:
     """Class representing a fraction and operations on it
 
@@ -13,6 +16,10 @@ class Fraction:
         POST : -
         RAISE : ZeroDivisionError si dénominateur = 0
         """
+        if num < 0 or den < 0:
+            raise FractionNotUnderZero
+        if isinstance(num,int) != True or isinstance(den,int) != True:
+            raise ValueError
         if den != 0:
             self.__num = num
             self.__den = den
@@ -64,7 +71,10 @@ class Fraction:
         PRE : other est une variable de type Fraction
         POST : renvoie la soustraction de deux fractions
         """
-        return ((self.__num / self.__den) - (other.__num / other.__den))
+        if ((self.__num / self.__den) - (other.__num / other.__den)) >= 0:
+            return ((self.__num / self.__den) - (other.__num / other.__den))
+        else:
+            raise FractionNotUnderZero()
 
     def __mul__(self, other):
         """Overloading of the * operator for fractions
