@@ -11,6 +11,7 @@ class Fraction:
 
         PRE : -
         POST : -
+        RAISE : ZeroDivisionError si dénominateur = 0
         """
         if den != 0:
             self.__num = num
@@ -101,10 +102,10 @@ class Fraction:
     def __float__(self):
         """Returns the decimal value of the fraction
 
-        PRE : ?
-        POST : ?
+        PRE : other est une variable de type Fraction
+        POST : renvoie la fraction sous forme de nombre à décimale
         """
-        return float(self.__num/self.__den)
+        return f"{self.__num/self.__den:.02f}"
 
     # TODO : [BONUS] You can overload other operators if you wish (ex : <, >, ...)
 
@@ -113,46 +114,47 @@ class Fraction:
     def is_zero(self):
         """Check if a fraction's value is 0
 
-        PRE : ?
-        POST : ?
+        PRE : -
+        POST : renvoie true si la fraction est égal à 0
         """
-        pass
+        return (self.__num/self.__den) == 0
 
     def is_integer(self):
         """Check if a fraction is integer (ex : 8/4, 3, 2/2, ...)
 
-        PRE : ?
-        POST : ?
+        PRE : -
+        POST : renvoie True si la fraction est un nombre entier
         """
-        pass
+        return self.__num % self.__den == 0
 
     def is_proper(self):
         """Check if the absolute value of the fraction is < 1
 
-        PRE : ?
-        POST : ?
+        PRE : -
+        POST : renvoie True si la valeur absolue de la fraction est plus petit que 1
         """
-
+        return -1 < (self.__num/self.__den) < 1
     def is_unit(self):
         """Check if a fraction's numerator is 1 in its reduced form
 
-        PRE : ?
-        POST : ?
+        PRE : -
+        POST : renvoie True si c'est une fraction unitaire
         """
-        pass
+        return self.__num == 1
 
     def is_adjacent_to(self, other):
         """Check if two fractions differ by a unit fraction
 
         Two fractions are adjacents if the absolute value of the difference them is a unit fraction
 
-        PRE : ?
-        POST : ?
+        PRE : other est une variable de type Fraction
+        POST : renvoie True si la différence des 2 fractions est plus petit ou égal à 0.5
         """
-        pass
+        difference = self - other
+        return difference <= 0.5
 
 
 if __name__ == "__main__":
-    a = Fraction(3,1)
-    b = Fraction (8, 2)
-    print(a.__float__())
+    a = Fraction(2,0)
+    b = Fraction (1, 2)
+    #print(a.is_adjacent_to(b))
